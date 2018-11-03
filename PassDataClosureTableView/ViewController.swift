@@ -10,9 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var textField: UITextField!
+    var bucket: String!
+    var onCompletion: ((String) -> Void)?
+    var data = Data()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        if bucket != nil {
+            textField.text = bucket!
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +27,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    @IBAction func doneButton(_ sender: Any?) {
+        onCompletion?(textField.text ?? "")
+        navigationController?.popViewController(animated: true)
+    }
+    
 }
 
